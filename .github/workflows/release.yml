@@ -1,0 +1,48 @@
+name: Package and release add-on
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out tagged version
+        uses: actions/checkout@v6
+
+      - name: Verify tag matches manifest version
+        shell: bash
+        run: |
+          manifest_version="$(jq -r '.version' manifest.json)"
+          expected_tag="v${manifest_version}"
+
+          if [[ "${GITHUB_REF_NAME}" != "${expected_tag}" ]]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match manifest version ${manifest_version}. Expected ${expected_tag}."
+            exit 1
+          fi
+
+      - name: Package add-on
+        shell: bash
+        run: |
+          git archive --format=zip --output=EpicAnki.zip "${GITHUB_SHA}"
+          mv EpicAnki.zip EpicAnki.ankiaddon
+
+      - name: Publish GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${GITHUB_REF_NAME}" > /dev/null 2>&1; then
+            gh release upload "${GITHUB_REF_NAME}" EpicAnki.ankiaddon --clobber
+          else
+            gh release create "${GITHUB_REF_NAME}" EpicAnki.ankiaddon \
+              --verify-tag \
+              --generate-notes \
+              --title "Epic Anki ${GITHUB_REF_NAME#v}"
+          fi

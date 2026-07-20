@@ -44,6 +44,10 @@ from .screens import (
     build_incognito_deck_browser,
     build_incognito_overview,
 )
+from .image_viewer import (
+    handle_image_viewer_message,
+    setup_image_viewer_dialog,
+)
 from .style import build_incognito_css
 from .usage_guide import open_usage_guide, setup_usage_guide_dialog
 
@@ -674,6 +678,9 @@ def setup_hooks() -> None:
     gui_hooks.webview_will_show_context_menu.append(
         add_incognito_context_menu_action
     )
+    gui_hooks.webview_did_receive_js_message.append(
+        handle_image_viewer_message
+    )
 
 
 def setup_finished_overview() -> None:
@@ -686,6 +693,7 @@ def setup_finished_overview() -> None:
 
 setup_configuration_dialog(redraw_current_screen)
 setup_usage_guide_dialog()
+setup_image_viewer_dialog()
 setup_menu()
 setup_hotkey()
 setup_zoom_shortcuts()

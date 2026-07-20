@@ -35,8 +35,10 @@ The menu bar is hidden while Incognito Mode is active. Press **F6** to return to
 | **Ctrl+Left Mouse Drag** | Resize the window from the corner corresponding to the pointer's quadrant. |
 | **Right-click** | Open a menu with options to toggle Dark Mode or exit Incognito Mode. |
 | **Click an image** | Expand or collapse an image in the incognito card layout. |
+| **[Full] under an image** | Open the image in a dedicated viewer window. |
 
 Zoom and position-slot shortcuts are active only in Incognito Mode. Incognito zoom is saved independently from normal Anki zoom.
+The dedicated image viewer remembers its window size and position between uses.
 
 ## Position Slots
 

@@ -14,6 +14,24 @@ IMAGE_TOGGLE_SCRIPT = """
       event.stopPropagation();
       image.classList.toggle("epic-anki-image-expanded");
     });
+
+    const fullLink = document.createElement("a");
+    fullLink.className = "epic-anki-image-full-link";
+    fullLink.href = "#";
+    fullLink.textContent = "[Full]";
+    fullLink.setAttribute("aria-label", "Open image in full viewer");
+    fullLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      pycmd("epic-anki-open-image:" + JSON.stringify({
+        src: image.currentSrc || image.src,
+        alt: image.alt || "",
+      }));
+    });
+    const insertionTarget = image.parentElement?.tagName === "A"
+      ? image.parentElement
+      : image;
+    insertionTarget.insertAdjacentElement("afterend", fullLink);
   });
 })();
 </script>

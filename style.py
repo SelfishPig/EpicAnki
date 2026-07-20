@@ -131,6 +131,15 @@ a:visited {
   text-decoration: underline;
 }
 
+a.epic-anki-image-full-link,
+a.epic-anki-image-full-link:link,
+a.epic-anki-image-full-link:visited {
+  display: block;
+  width: fit-content;
+  margin-top: 2px;
+  color: var(--accent-color) !important;
+}
+
 ul {
   margin: 0;
   padding-left: 20px;

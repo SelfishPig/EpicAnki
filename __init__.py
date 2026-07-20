@@ -569,6 +569,16 @@ def apply_dark_mode(enabled: bool) -> None:
     redraw_current_screen()
 
 
+def add_incognito_context_menu_action(webview, menu) -> None:
+    if not incognito_mode or webview is not mw.web:
+        return
+
+    menu.addSeparator()
+    exit_action = QAction("Exit Incognito Mode", menu)
+    qconnect(exit_action.triggered, leave_incognito_before_profile_close)
+    menu.addAction(exit_action)
+
+
 def setup_menu() -> None:
     global toggle_action, dark_mode_action
     menu = mw.form.menubar.addMenu("Epic Anki")
@@ -658,6 +668,9 @@ def setup_hooks() -> None:
     gui_hooks.profile_will_close.append(leave_incognito_before_profile_close)
     gui_hooks.webview_will_set_content.append(apply_incognito_deck_browser)
     gui_hooks.webview_will_set_content.append(apply_incognito_overview)
+    gui_hooks.webview_will_show_context_menu.append(
+        add_incognito_context_menu_action
+    )
 
 
 def setup_finished_overview() -> None:

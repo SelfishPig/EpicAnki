@@ -33,6 +33,7 @@ The menu bar is hidden while Incognito Mode is active. Press **F6** to return to
 | **Shift+Right Arrow** or **Ctrl+Right Arrow** | Switch to the next position slot. |
 | **Shift+Left Mouse Drag** | Move the frameless incognito window. |
 | **Ctrl+Left Mouse Drag** | Resize the window from the corner corresponding to the pointer's quadrant. |
+| **Right-click** | Open a menu with an option to exit Incognito Mode. |
 | **Click an image** | Expand or collapse an image in the incognito card layout. |
 
 Zoom and position-slot shortcuts are active only in Incognito Mode. Incognito zoom is saved independently from normal Anki zoom.

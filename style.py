@@ -28,7 +28,7 @@ body {
 body {
   margin: 5px;
   font-family: Arial, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.4;
   text-align: left !important;
 }

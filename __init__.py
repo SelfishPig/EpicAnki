@@ -574,6 +574,9 @@ def add_incognito_context_menu_action(webview, menu) -> None:
         return
 
     menu.addSeparator()
+    if dark_mode_action is not None:
+        menu.addAction(dark_mode_action)
+
     exit_action = QAction("Exit Incognito Mode", menu)
     qconnect(exit_action.triggered, leave_incognito_before_profile_close)
     menu.addAction(exit_action)
